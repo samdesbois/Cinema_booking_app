@@ -12,10 +12,7 @@ class CinemaDb(GeneralDb):
             SELECT taken FROM {self.db_table} WHERE seat_id = '{seat_choice_to_check}'
         """)
         result = cursor.fetchall()  # is a tuple into a list
-        if result[0][0] == 1:
-            return False
-        else:
-            return True
+        return result
 
     def seat_info(self, seat_choice_to_look):
         """
