@@ -1,0 +1,17 @@
+Title: Cinema booking app
+Description: Terminal user interface for reserving cinema tickets with a credit card.
+The application checks that the seat is available, that the card's details are correct
+and that the balance is sufficient. If all these conditions are met, the money balance
+is updated and an email with a pdf receipt is sent.
+Objects: GeneralDb, CinemaDb, CreditCardDb
+    GeneralDb:
+        db_name
+        db_table
+    CinemaDb(GeneralDb):
+        check_seat_avaibality(seat)
+        seat_info(seat)
+        update_seat_status()
+    CreditCardDb(GeneralDb):
+        verify_card_exists(client-dic)
+        final_payment(seat_price)
+
