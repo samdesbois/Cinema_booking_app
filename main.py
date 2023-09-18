@@ -9,6 +9,13 @@ from creditcarddb import CreditCardDb
 
 
 def send_pdf_by_email(client_entered, seat_choice_entered , id_created):
+    """"
+    Creates a PDF and sends it by mail.
+    :param client_entered:
+    :param seat_choice_entered:
+    :param id_created:
+    :return nothing:
+    """
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font('Arial', 'B', 16)
@@ -49,7 +56,7 @@ def generate_random_ticket_id():
     :return:
     """
     string_base = string.printable
-    char_to_remove = (" ", '"')
+    char_to_remove = (" ", '"', "`")
     for c in char_to_remove:
         string_base = string_base.replace(c, "")
     id_length = 10
