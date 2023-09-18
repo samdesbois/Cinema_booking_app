@@ -138,36 +138,30 @@ if __name__ == '__main__':
                 if response.lower() != "y" and response != "":
                     continue
                 else:
-                    if len(card_db.verify_card_exists(client)) == 0:
-                        print("The credit card information you provided "
-                              "are wrong.")
-                        continue
-                    else:
-                        print("Nous interrogeons votre banque...")
-                        if card_db.final_payment(
-                                cinema_db.seat_info(seat_choice)[1],
-                                client
-                        ):
-                            ticket_id = generate_random_ticket_id()
-                            cinema_db.update_seat_status(seat_choice, ticket_id)
-                            print(f"Merci pour votre achat"
-                                  f" {client['full_name']}.")
-                            print(f"Vous avez donc réservé le siège"
-                                  f" {seat_choice} avec l'id : {ticket_id}")
-                            email_response = input("Voulez-vous recevoir"
-                                                   " par email ? (Y/n)")
-                            if email_response.lower() != "y" and email_response != "":
-                                pass
-                            else:
-                                client["email"] = input("Votre email : ")
-                                send_pdf_by_email(
-                                    client,
-                                    seat_choice,
-                                    ticket_id
-                                )
-
+                    if card_db.final_payment(
+                            cinema_db.seat_info(seat_choice)[1],
+                            client
+                    ):
+                        ticket_id = generate_random_ticket_id()
+                        cinema_db.update_seat_status(seat_choice, ticket_id)
+                        print(f"Merci pour votre achat"
+                              f" {client['full_name']}.")
+                        print(f"Vous avez donc réservé le siège"
+                              f" {seat_choice} avec l'id : {ticket_id}")
+                        email_response = input("Voulez-vous recevoir"
+                                               " par email ? (Y/n)")
+                        if email_response.lower() != "y" and email_response != "":
+                            pass
                         else:
-                            print("Une erreur est survenue!")
-                            continue
+                            client["email"] = input("Votre email : ")
+                            send_pdf_by_email(
+                                client,
+                                seat_choice,
+                                ticket_id
+                            )
+                    else:
+                        print("An error occurred, please verify you credit "
+                              "card infos.")
+                        continue
 
     print("Merci pour votre venue")
